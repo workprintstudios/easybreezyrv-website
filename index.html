@@ -1,0 +1,571 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Easy Breezy RV - Your Home Away From Home">
+    <title>Easy Breezy RV - Your Home Away From Home</title>
+
+    <style>
+        :root {
+            --text: #222;
+            --muted: #666;
+            --accent: #333;
+            --light: #f7f7f7;
+            --border: #ddd;
+            --max: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button, input, textarea {
+            font: inherit;
+        }
+
+        .container {
+            width: min(var(--max), calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            border-bottom: 1px solid var(--border);
+            background: #fff;
+        }
+
+        .topbar-inner {
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+        }
+
+        .topbar a {
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        header {
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        .header-inner {
+            min-height: 74px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .logo {
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: .2px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .menu-toggle {
+            display: none;
+            border: 1px solid var(--border);
+            background: #fff;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        main {
+            display: block;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 90px 20px 80px;
+        }
+
+            .hero h1 {
+                margin: 0 0 22px;
+                font-family: Georgia, "Times New Roman", serif;
+                font-size: clamp(34px, 5vw, 52px);
+                font-weight: 400;
+                letter-spacing: -.5px;
+            }
+
+            .hero p {
+                max-width: 780px;
+                margin: 0 auto 8px;
+                font-size: 18px;
+            }
+
+            .hero .phone {
+                margin-top: 24px;
+                font-size: 23px;
+                font-weight: 600;
+            }
+
+                .hero .phone a {
+                    text-decoration: none;
+                }
+
+        .adventure {
+            min-height: 430px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.18)), #e9e9e9;
+        }
+
+        .adventure-inner {
+            width: min(780px, calc(100% - 40px));
+            margin: auto;
+            text-align: center;
+            padding: 70px 20px;
+            background: rgba(255,255,255,.92);
+        }
+
+        .adventure h2 {
+            margin: 0 0 24px;
+            font-size: 29px;
+            font-weight: 600;
+        }
+
+        .rvshare {
+            display: inline-block;
+            margin: 18px 0 30px;
+        }
+
+            .rvshare img {
+                display: block;
+                max-width: 165px;
+                height: auto;
+            }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 13px 25px;
+            border: 1px solid #222;
+            background: #222;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity .2s ease;
+        }
+
+            .button:hover {
+                opacity: .8;
+            }
+
+            .button.secondary {
+                background: #fff;
+                color: #222;
+            }
+
+        .contact {
+            padding: 80px 20px;
+            background: #f6f6f6;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact h2 {
+            margin: 0 0 28px;
+            font-size: 30px;
+            font-weight: 500;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 16px;
+        }
+
+            .contact-form input,
+            .contact-form textarea {
+                width: 100%;
+                border: 1px solid #ccc;
+                background: #fff;
+                padding: 13px 14px;
+                outline: none;
+            }
+
+                .contact-form input:focus,
+                .contact-form textarea:focus {
+                    border-color: #555;
+                }
+
+            .contact-form textarea {
+                min-height: 150px;
+                resize: vertical;
+            }
+
+        .form-status {
+            min-height: 24px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .map {
+            min-height: 340px;
+            border: 1px solid #ccc;
+            background: linear-gradient(135deg, transparent 49.5%, #d5d5d5 50%, transparent 50.5%), linear-gradient(45deg, transparent 49.5%, #d5d5d5 50%, transparent 50.5%), #eee;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 30px;
+        }
+
+            .map span {
+                background: rgba(255,255,255,.9);
+                padding: 12px 18px;
+            }
+
+        footer {
+            border-top: 1px solid var(--border);
+            background: #fff;
+            padding: 28px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+            .footer-links a {
+                text-decoration: none;
+            }
+
+        .separator {
+            color: #bbb;
+        }
+
+        #scroll-top {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border: 1px solid #222;
+            background: #fff;
+            color: #222;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: .2s ease;
+            z-index: 30;
+        }
+
+            #scroll-top.visible {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+        @media (max-width: 760px) {
+            .header-inner {
+                min-height: 64px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+            }
+
+                nav.open {
+                    display: block;
+                }
+
+                nav ul {
+                    flex-direction: column;
+                    align-items: stretch;
+                    gap: 0;
+                    border-top: 1px solid var(--border);
+                }
+
+                nav li {
+                    border-bottom: 1px solid var(--border);
+                }
+
+                nav a {
+                    display: block;
+                    padding: 12px 0;
+                }
+
+            .header-inner {
+                flex-wrap: wrap;
+            }
+
+            nav {
+                order: 3;
+            }
+
+            .hero {
+                padding: 65px 20px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <header>
+        <div class="container header-inner">
+            <a class="logo" href="#home" aria-label="Easy Breezy RV home">Easy Breezy RV</a>
+
+            <button class="menu-toggle" id="menuToggle" type="button"
+                    aria-label="Toggle navigation" aria-expanded="false">
+                Menu
+            </button>
+
+            <nav id="siteNav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="home">
+        <section class="hero" aria-labelledby="welcome-heading">
+            <div class="container">
+                <h1 id="welcome-heading">WELCOME</h1>
+                <p>EASY BREEZY RV is a RV rental company based out of Pinellas County, Florida. RV Sharing across Central Florida.</p>
+                <p>(Non-Hookup location restrictions apply.)</p>
+                <p class="phone">CALL NOW: <a href="tel:+17273145167">(727) 314-5178</a></p>
+            </div>
+        </section>
+
+        <section class="adventure" id="about" aria-labelledby="adventure-heading">
+            <div class="adventure-inner">
+                <h2 id="adventure-heading">Life is boring without adventure.</h2>
+
+                <a class="rvshare" href="https://rvshare.com/rvs/details/1548089" target="_blank" rel="noopener noreferrer">
+                    <img src="wp-content/uploads/brizy/imgs/rvshare-logo-165x43x0x1x165x41x1631562220.png"
+                         alt="RVshare">
+                </a>
+
+                <div class="buttons">
+                    <a class="button" href="#about">MORE ABOUT US</a>
+                    <a class="button secondary" href="#contact">CONTACT US</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact" aria-labelledby="contact-heading">
+            <div class="container contact-grid">
+                <div>
+                    <h2 id="contact-heading">Get In Touch</h2>
+
+                    <!--<form class="contact-form" id="contactForm">
+        <input id="name" name="name" type="text" placeholder="Name" autocomplete="name" required>
+        <input id="email" name="email" type="email" placeholder="Email" autocomplete="email" required>
+        <input id="phone" name="phone" type="tel" placeholder="Phone" autocomplete="tel">
+        <textarea id="message" name="message" placeholder="Message" required></textarea>
+
+        <button class="button" type="submit">SUBMIT</button>
+        <div class="form-status" id="formStatus" aria-live="polite"></div>
+    </form>-->
+
+                    <a href="mailto:easybreezyrv@gmail.com"
+                       style="
+                         display:inline-flex;
+                         align-items:center;
+                         gap:10px;
+                         padding:14px 24px;
+                         background:linear-gradient(135deg,#1e88e5,#1565c0);
+                         color:#fff;
+                         text-decoration:none;
+                         font-family:Arial,sans-serif;
+                         font-size:16px;
+                         font-weight:700;
+                         border-radius:8px;
+                         box-shadow:0 4px 12px rgba(0,0,0,.18);
+                       ">
+                        <span style="
+                        display:inline-flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-size:22px;
+                        line-height:1;
+                        filter:drop-shadow(0 1px 1px rgba(0,0,0,.25));
+                      ">&#9993;</span>
+                        Email
+                    </a>
+                    <a href="tel:+17272199954"
+                       style="
+                         display:inline-flex;
+                         align-items:center;
+                         gap:10px;
+                         padding:14px 24px;
+                         background:linear-gradient(135deg,#1e88e5,#1565c0);
+                         color:#fff;
+                         text-decoration:none;
+                         font-family:Arial,sans-serif;
+                         font-size:16px;
+                         font-weight:700;
+                         border-radius:8px;
+                         box-shadow:0 4px 12px rgba(0,0,0,.18);
+                       ">
+                        <span style="
+                        display:inline-flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-size:22px;
+                        line-height:1;
+                        filter:drop-shadow(0 1px 1px rgba(0,0,0,.25));
+                      ">&#9742;</span>
+                        Call
+                    </a>
+                    <a href="sms:+17272199954"
+                       style="
+                         display:inline-flex;
+                         align-items:center;
+                         gap:10px;
+                         padding:14px 24px;
+                         background:linear-gradient(135deg,#1e88e5,#1565c0);
+                         color:#fff;
+                         text-decoration:none;
+                         font-family:Arial,sans-serif;
+                         font-size:16px;
+                         font-weight:700;
+                         border-radius:8px;
+                         box-shadow:0 4px 12px rgba(0,0,0,.18);
+                       ">
+                                            <span style="
+                        display:inline-flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-size:22px;
+                        line-height:1;
+                        filter:drop-shadow(0 1px 1px rgba(0,0,0,.25));
+                       ">&#128172;</span>
+                        Text Message
+                    </a>
+                </div>
+                
+                    <div class="map" aria-label="Pinellas County, Florida"
+                         style="
+                            position:relative;
+                            width:100%;
+                            height:500px;
+                            border-radius:12px;
+                            overflow:hidden;
+                         ">
+
+                        <iframe src="https://www.google.com/maps?q=28.0,-82.5&z=9&output=embed"
+                                width="100%"
+                                height="100%"
+                                style="border:0;"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                allowfullscreen>
+                        </iframe>
+
+                        <div style="
+                            position:absolute;
+                            bottom:0;
+                            left:0;
+                            width:100%;
+                            
+                            padding:14px 20px;
+                           
+                            text-align:center;
+                            font-family:Arial,sans-serif;
+                        ">
+                            <a href="https://www.google.com/maps/search/?api=1&query=Pinellas+County+Hillsborough+County+Florida"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               style="
+                                   display:inline-block;
+                                   padding:12px 20px;
+                                   background:#1e88e5;
+                                   color:#fff;
+                                   text-decoration:none;
+                                   border-radius:6px;
+                                   font-weight:700;
+                               ">
+                                View Service Area
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-links">
+                <a href="terms" id="termsLink">Terms and Conditions</a>
+                <span class="separator">-</span>
+                <a href="privacy-policy" id="privacyLink">Privacy Policy</a>
+                <span class="separator">-</span>
+                <a href="cookies" id="cookiesLink">Cookies</a>
+            </div>
+            <div>Easy Breezy RV</div>
+        </footer>
+
+        <a href="#home" id="scroll-top" aria-label="Scroll to the top">↑</a>
+
+    </body>
+    </html>
